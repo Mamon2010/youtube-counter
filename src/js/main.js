@@ -22,7 +22,7 @@
    let imageChannel = document.querySelector('#imageChannel');
    let countWiews = document.querySelector('#countWiews');
    let subs = document.querySelector('#colRemaind1000000');
-
+   let timerId = 0;
    let form = document.querySelector('form');
 
    let showStat = (Id) => {
@@ -46,7 +46,9 @@
        let nameChannel = document.querySelector('#nameChannel').value;
        searchStat(nameChannel);
        //    var interval = setInterval(searchStat(nameChannel), 5000);
-       setInterval(() => { searchStat(nameChannel) }, 10000);
+       clearInterval(timerId);
+       timerId = setInterval(() => { searchStat(nameChannel) }, 10000);
+
    })
 
    let searchStat = (nameChannel) => {

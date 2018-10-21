@@ -23,7 +23,7 @@ var count = document.querySelector('#count');
 var imageChannel = document.querySelector('#imageChannel');
 var countWiews = document.querySelector('#countWiews');
 var subs = document.querySelector('#colRemaind1000000');
-
+var timerId = 0;
 var form = document.querySelector('form');
 
 var showStat = function showStat(Id) {
@@ -47,7 +47,8 @@ form.addEventListener('submit', function (event) {
     var nameChannel = document.querySelector('#nameChannel').value;
     searchStat(nameChannel);
     //    var interval = setInterval(searchStat(nameChannel), 5000);
-    setInterval(function () {
+    clearInterval(timerId);
+    timerId = setInterval(function () {
         searchStat(nameChannel);
     }, 10000);
 });
