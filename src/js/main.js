@@ -17,8 +17,8 @@
        client.get('https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC_x5XG1OV2P6uZZ5FSM9Ttw&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q', (response) => {
            console.log(JSON.parse(response).items[0].statistics.subscriberCount);
        })
-       client.get('https://www.googleapis.com/youtube/v3/channels?part=snippet&id=UCVswRUcKC-M35RzgPRv8qUg&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q', (response) => {
-           console.log(JSON.parse(response).items[0].snippet.description);
+       client.get('https://www.googleapis.com/youtube/v3/channels?part=brandingSettings&id=UCVswRUcKC-M35RzgPRv8qUg&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q', (response) => {
+           console.log(JSON.parse(response).items[0].brandingSettings.channel.description);
        })
    }
 
