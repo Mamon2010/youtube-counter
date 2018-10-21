@@ -20,7 +20,8 @@
    let descriptionChannel = document.querySelector('#descriptionChannel');
    let count = document.querySelector('#count');
    let imageChannel = document.querySelector('#imageChannel');
-
+   let countWiews = document.querySelector('#countWiews');
+   let subs = document.querySelector('#colRemaind100000');
 
    let showStat = () => {
        client.get(`https://www.googleapis.com/youtube/v3/channels?part=${partChannel}&id=${idChannel}&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q`, (response) => {
@@ -31,7 +32,10 @@
            nameChannel.innerText = info.brandingSettings.channel.title;
            descriptionChannel.innerText = info.brandingSettings.channel.description;
            count.innerText = info.statistics.subscriberCount;
-           imageChannel.src = info.brandingSettings.image.bannerMobileMediumHdImageUrl;
+           imageChannel.src = info.brandingSettings.image.bannerMobileMediumHdImageUrl
+           countWiews.innerText = info.statistics.viewCount;
+           let colRemaind100000 = 100000 - info.statistics.subscriberCount;
+           subs.innerText = colRemaind100000;
        })
    }
 

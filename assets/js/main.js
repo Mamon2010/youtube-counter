@@ -21,6 +21,8 @@ var nameChannel = document.querySelector('#nameChannel');
 var descriptionChannel = document.querySelector('#descriptionChannel');
 var count = document.querySelector('#count');
 var imageChannel = document.querySelector('#imageChannel');
+var countWiews = document.querySelector('#countWiews');
+var subs = document.querySelector('#colRemaind100000');
 
 var showStat = function showStat() {
    client.get('https://www.googleapis.com/youtube/v3/channels?part=' + partChannel + '&id=' + idChannel + '&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q', function (response) {
@@ -32,6 +34,9 @@ var showStat = function showStat() {
       descriptionChannel.innerText = info.brandingSettings.channel.description;
       count.innerText = info.statistics.subscriberCount;
       imageChannel.src = info.brandingSettings.image.bannerMobileMediumHdImageUrl;
+      countWiews.innerText = info.statistics.viewCount;
+      var colRemaind100000 = 100000 - info.statistics.subscriberCount;
+      subs.innerText = colRemaind100000;
    });
 };
 
