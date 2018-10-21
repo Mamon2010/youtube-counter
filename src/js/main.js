@@ -16,30 +16,46 @@
    let idChannel = 'UCVswRUcKC-M35RzgPRv8qUg';
    let partChannel = 'statistics,brandingSettings';
 
-   let nameChannel = document.querySelector('#nameChannel');
+   let titleChannel = document.querySelector('#titleChannel');
    let descriptionChannel = document.querySelector('#descriptionChannel');
    let count = document.querySelector('#count');
    let imageChannel = document.querySelector('#imageChannel');
    let countWiews = document.querySelector('#countWiews');
-   let subs = document.querySelector('#colRemaind100000');
+   let subs = document.querySelector('#colRemaind1000000');
 
-   let showStat = () => {
-       client.get(`https://www.googleapis.com/youtube/v3/channels?part=${partChannel}&id=${idChannel}&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q`, (response) => {
+   let form = document.querySelector('form');
+
+   let showStat = (Id) => {
+       client.get(`https://www.googleapis.com/youtube/v3/channels?part=${partChannel}&id=${Id}&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q`, (response) => {
            //    console.log(JSON.parse(response).items[0]);
            let info = JSON.parse(response).items[0];
            console.log(info);
 
-           nameChannel.innerText = info.brandingSettings.channel.title;
+           titleChannel.innerText = info.brandingSettings.channel.title;
            descriptionChannel.innerText = info.brandingSettings.channel.description;
            count.innerText = info.statistics.subscriberCount;
            imageChannel.src = info.brandingSettings.image.bannerMobileMediumHdImageUrl
            countWiews.innerText = info.statistics.viewCount;
-           let colRemaind100000 = 100000 - info.statistics.subscriberCount;
-           subs.innerText = colRemaind100000;
+           let colRemaind1000000 = 1000000 - info.statistics.subscriberCount;
+           subs.innerText = colRemaind1000000;
        })
    }
 
-   showStat();
+
+   form.addEventListener('submit', (event) => {
+       event.defaultPrevented;
+       let nameChannel = document.querySelector('#nameChannel').value;
+       searchStat(nameChannel);
+   })
+
+   let searchStat = (nameChannel) => {
+       client.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&maxResults=1&q=${nameChannel}&key=AIzaSyAk-6HA611Wq9Or9dELINuHLd2Thj5JN1Q`, (response) => {
+           let info = JSON.parse(response).items[0].snippet.channelId;
+           showStat(info);
+       })
+   }
+
+   showStat(idChannel);
 
 
 
