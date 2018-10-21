@@ -34,11 +34,11 @@ var showStat = function showStat(Id) {
 
         titleChannel.innerText = info.brandingSettings.channel.title;
         descriptionChannel.innerText = info.brandingSettings.channel.description;
-        count.innerText = info.statistics.subscriberCount;
+        count.innerText = info.statistics.subscriberCount.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
         imageChannel.src = info.brandingSettings.image.bannerMobileMediumHdImageUrl;
-        countWiews.innerText = info.statistics.viewCount;
+        countWiews.innerText = info.statistics.viewCount.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
         var colRemaind1000000 = 1000000 - info.statistics.subscriberCount;
-        subs.innerText = colRemaind1000000;
+        subs.innerText = colRemaind1000000.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     });
 };
 
@@ -46,6 +46,10 @@ form.addEventListener('submit', function (event) {
     event.defaultPrevented;
     var nameChannel = document.querySelector('#nameChannel').value;
     searchStat(nameChannel);
+    //    var interval = setInterval(searchStat(nameChannel), 5000);
+    setInterval(function () {
+        searchStat(nameChannel);
+    }, 10000);
 });
 
 var searchStat = function searchStat(nameChannel) {
